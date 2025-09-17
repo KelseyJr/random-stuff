@@ -17,7 +17,8 @@
     "enabled": true,
     "rules": {
       "recommended": true
-    }
+    },
+    "ignore": ["build/", "node_modules/", ".env", ".env.*", "!.env.example"]
   },
   "javascript": {
     "formatter": {
