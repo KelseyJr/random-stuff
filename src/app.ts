@@ -7,6 +7,7 @@ import {
 	validatorCompiler,
 	type ZodTypeProvider,
 } from 'fastify-type-provider-zod';
+import { createUserController } from './controllers/create-user/create-user.controller';
 
 const server = fastify().withTypeProvider<ZodTypeProvider>();
 
@@ -28,5 +29,7 @@ if (process.env.NODE_ENV === 'development') {
 
 server.setValidatorCompiler(validatorCompiler);
 server.setSerializerCompiler(serializerCompiler);
+
+server.register(createUserController);
 
 export { server };
