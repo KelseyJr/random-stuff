@@ -4,15 +4,19 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "dev": "node --env-file .env --watch src/server.ts",
+    "dev": "pnpm db:migrate && node --env-file .env --watch src/server.ts",
     "build": "tsup src --out-dir build",
-    "test": "vitest"
+    "test": "vitest",
+    "db:push": "npx drizzle-kit push",
+    "db:studio": "npx drizzle-kit studio",
+    "db:generate": "npx drizzle-kit generate",
+    "db:migrate": "npx drizzle-kit migrate"
   },
   "type": "module",
   "keywords": [],
   "author": "",
   "license": "ISC",
-  "packageManager": "pnpm@10.16.1",
+  "packageManager": "pnpm@10.17.1",
   "dependencies": {
     "@fastify/swagger": "^9.5.1",
     "@fastify/swagger-ui": "^5.2.3",
