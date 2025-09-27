@@ -1,6 +1,13 @@
 import { server } from '../../app.ts';
+import { databaseClient } from '../../database/client.ts';
+import { users } from '../../database/schema.ts';
 
 describe('CreateUserController', () => {
+	beforeEach(async () => {
+		await server.ready();
+		await databaseClient.delete(users);
+	});
+
 	it('should be able to create a new user', async () => {
 		const response = await server.inject({
 			method: 'POST',

@@ -10,7 +10,12 @@ export default defineConfig({
 			reporter: ['text', 'text-summary', 'html'],
 			all: true,
 			include: ['src/**/*.ts'],
-			exclude: ['**/*.test.ts', 'src/tests/**', 'build/**'],
+			exclude: [
+				'**/*.test.ts',
+				'src/tests/**',
+				'build/**',
+				'src/domain/repositories/**',
+			],
 		},
 	},
 });
