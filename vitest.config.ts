@@ -13,7 +13,7 @@ export default defineConfig({
 			exclude: [
 				'**/*.test.ts',
 				'src/tests/**',
-				'build/**',
+				'dist/**',
 				'src/domain/repositories/**',
 				'src/app.ts',
 				'src/server.ts',

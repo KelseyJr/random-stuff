@@ -9,6 +9,7 @@ COPY package.json pnpm-lock.yaml ./
 COPY tsconfig.json drizzle.config.ts ./
 RUN pnpm install
 COPY . .
+RUN pnpm build
 
 # ---------- Production stage ----------
 FROM base AS prod
