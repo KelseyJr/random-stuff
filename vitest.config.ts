@@ -15,6 +15,8 @@ export default defineConfig({
 				'src/tests/**',
 				'build/**',
 				'src/domain/repositories/**',
+				'src/app.ts',
+				'src/server.ts',
 			],
 		},
 	},
