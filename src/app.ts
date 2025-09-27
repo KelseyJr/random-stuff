@@ -7,6 +7,7 @@ import {
 	validatorCompiler,
 	type ZodTypeProvider,
 } from 'fastify-type-provider-zod';
+import { createUserController } from './controllers/create-user/create-user.controller.ts';
 
 const server = fastify().withTypeProvider<ZodTypeProvider>();
 
@@ -28,5 +29,15 @@ if (process.env.NODE_ENV === 'development') {
 
 server.setValidatorCompiler(validatorCompiler);
 server.setSerializerCompiler(serializerCompiler);
+
+server.setErrorHandler(async (error, _request, reply) => {
+	if (error instanceof Error) {
+		reply.status(400).send({ message: error.message });
+	} else {
+		reply.status(500).send({ message: 'Internal Server Error' });
+	}
+});
+
+server.register(createUserController);
 
 export { server };

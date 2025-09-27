@@ -1,0 +1,49 @@
+
+services:
+  app:
+    build:
+      context: .
+      target: builder # use base image, not prod
+    container_name: app
+    ports:
+      - "3333:3333"
+    depends_on:
+      database:
+        condition: service_healthy
+    env_file:
+      - .env
+    volumes:
+      - .:/usr/src/app:cached
+      - /usr/src/app/node_modules
+    networks:
+      - app-network
+    command: >
+      sh -c "pnpm dev"
+
+  database:
+    image: ankane/pgvector:latest
+    container_name: database
+    restart: always
+    environment:
+      POSTGRES_USER: user
+      POSTGRES_PASSWORD: pass
+      POSTGRES_DB: random-stuff
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U user -d random-stuff"]
+      interval: 5s
+      timeout: 5s
+      retries: 5
+      start_period: 10s
+    networks:
+      - app-network
+
+volumes:
+  postgres_data:
+
+networks:
+  app-network:
+    driver: bridge

@@ -1,28 +1,20 @@
-name: Dev Push
+name: CI to execute on each push from any branch different from master
 
 on:
   push:
-    branches:
-      - '**'
+    branches-ignore:
+      - master
 
 jobs:
   build:
     runs-on: ubuntu-latest
+
     steps:
       - name: Checkout repository
         uses: actions/checkout@v5
 
-      - name: Install pnpm
-        uses: pnpm/action-setup@v4
-      
-      - name: Set up Node.js
-        uses: actions/setup-node@v5
-        with:
-          node-version: '22'
-          cache: 'pnpm'
-      
-      - name: Install dependencies
-        run: pnpm install
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v3
 
-      - name: Build
-        run: pnpm build
+      - name: Run tests
+        run: docker compose -f docker-compose.test.yml run --rm test
