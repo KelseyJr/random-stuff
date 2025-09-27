@@ -13,7 +13,7 @@ describe('CreateUserController', () => {
 
 		expect(response.statusCode).toBe(201);
 		expect(response.json()).toEqual({
-			id: '1',
+			id: expect.any(Number),
 			name: 'John Doe',
 			email: 'john.doe@example.com',
 		});

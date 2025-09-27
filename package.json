@@ -6,7 +6,7 @@
   "scripts": {
     "dev": "pnpm db:migrate && node --env-file .env --watch src/server.ts",
     "build": "tsup src --out-dir build",
-    "test": "vitest",
+    "test": "vitest run",
     "db:push": "npx drizzle-kit push",
     "db:studio": "npx drizzle-kit studio",
     "db:generate": "npx drizzle-kit generate",
@@ -32,6 +32,7 @@
     "@biomejs/biome": "2.2.4",
     "@types/node": "^24.3.1",
     "@types/pg": "^8.15.5",
+    "@vitest/coverage-v8": "^3.2.4",
     "dotenv": "^17.2.2",
     "drizzle-kit": "^0.31.4",
     "tsup": "^8.5.0",
