@@ -1,4 +1,4 @@
-name: CI to execute on each push from any branch different from master
+name: Run tests
 
 on:
   push:
